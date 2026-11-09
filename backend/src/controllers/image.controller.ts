@@ -145,19 +145,20 @@ export const getAllUsers = async (req: any, res: any) => {
 //getSingleImage
 export const getSingleImage = async (req: any, res: any) => {
   try {
-    const image = Image.findOne({
-      id: req.params.userId,
-      userId: req.user.id,
+    const image = await Image.findOne({
+      _id: req.params.id,
+      userId: req.user.userId,
     });
+
     if (!image) {
       return res.status(404).json({
-        message: "image not found !!",
+        message: "image not found",
       });
     }
-    //means image is sent to the frontend
-    res.status(200).json({ image });
+
+    return res.status(200).json({ image });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       message: "failed to fetch the image",
     });
   }
@@ -166,18 +167,24 @@ export const getSingleImage = async (req: any, res: any) => {
 export const deleteImage = async (req: any, res: any) => {
   try {
     const id = req.params.id;
-    const image = Image.findByIdAndDelete(id);
+
+    const image = await Image.findOneAndDelete({
+      _id: id,
+      userId: req.user.userId,
+    });
+
     if (!image) {
-      res.status(404).json({
+      return res.status(404).json({
         message: "image not found",
       });
     }
-    res.status(200).json({
+
+    return res.status(200).json({
       message: "image successfully deleted",
     });
   } catch (error) {
-    res.status(500).json({
-      message: " problem occured in deleting the image",
+    return res.status(500).json({
+      message: "problem occurred in deleting the image",
     });
   }
 };

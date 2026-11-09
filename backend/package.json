@@ -1,11 +1,11 @@
 {
   "name": "image-processing-service",
   "version": "1.0.0",
-   "type": "module",
+  "type": "module",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/server.ts",
+    "dev": "tsx watch src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js"
   },
@@ -32,6 +32,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/multer": "^2.1.0",
     "@types/node": "^25.9.1",
+    "nodemon": "^3.1.14",
     "ts-node-dev": "^2.0.0",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3"

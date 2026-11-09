@@ -1,4 +1,4 @@
-import express from "express";
+import express from "express"
 import authmiddleware from "../middlewares/auth.middleware.js";
 import upload from "../middlewares/upload.middleware.js";
 import {
@@ -20,6 +20,6 @@ router.post(
 router.post("/:id/transform", authmiddleware, transformImage);
 router.get("/", authmiddleware, getAllUsers);
 router.get("/:id", authmiddleware, getSingleImage);
-router.get("/:id", deleteImage);
+router.delete("/:id", authmiddleware, deleteImage);
 
 export default router;
